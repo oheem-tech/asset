@@ -28,7 +28,7 @@ Name: "{userstartup}\Inventaris Aset Server"; Filename: "{app}\Start_Hidden.vbs"
 
 [Run]
 ; 1. Menjalankan skrip downloader secara senyap saat instalasi (mengambil source code dari GitHub)
-Filename: "{app}\php\php.exe"; Parameters: "install_otomatis.php"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
+Filename: "{app}\php\php.exe"; Parameters: """{app}\install_otomatis.php"""; WorkingDir: "{app}"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
 
 ; 2. Menjalankan aplikasi langsung setelah selesai di-instal
 Filename: "{app}\Mulai_Aplikasi.bat"; Description: "Jalankan Aplikasi Sekarang"; Flags: nowait postinstall skipifsilent

@@ -17,6 +17,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_USERAGENT, 'PHP Installer CLI');
 $zip_data = curl_exec($ch);
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curl_error = curl_error($ch);
 curl_close($ch);
 
 if ($http_code == 200 && !empty($zip_data)) {
@@ -61,6 +62,11 @@ if ($http_code == 200 && !empty($zip_data)) {
             rmdir($dirPath);
         }
         deleteDir($temp_dir);
+        file_put_contents(__DIR__ . '/install_log.txt', "SUKSES. Download & Ekstrak berhasil.\n");
+    } else {
+        file_put_contents(__DIR__ . '/install_log.txt', "GAGAL: Tidak bisa membuka file ZIP yang didownload.\n");
     }
+} else {
+    file_put_contents(__DIR__ . '/install_log.txt', "GAGAL DOWNLOAD dari GitHub.\nHTTP Code: $http_code\ncURL Error: $curl_error\nURL: $zip_url\n");
 }
 ?>
