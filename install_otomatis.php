@@ -2,8 +2,8 @@
 // install_otomatis.php
 // Skrip ini dijalankan oleh Inno Setup secara sembunyi-sembunyi saat proses instalasi berjalan
 
-$github_username = 'USERNAME_GITHUB_ANDA'; // Ganti ini
-$github_repo     = 'NAMA_REPO_ANDA';       // Ganti ini
+$github_username = 'oheem-tech'; // Ganti ini
+$github_repo     = 'asset';       // Ganti ini
 $branch          = 'main';
 
 $zip_url = "https://github.com/$github_username/$github_repo/archive/refs/heads/$branch.zip";
