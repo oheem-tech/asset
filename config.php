@@ -1,6 +1,11 @@
 <?php
 // config.php
 $db_file = __DIR__ . '/db/inventaris.sqlite';
+$blank_file = __DIR__ . '/db/inventaris_blank.sqlite';
+
+if (!file_exists($db_file) && file_exists($blank_file)) {
+    copy($blank_file, $db_file);
+}
 
 try {
     $pdo = new PDO("sqlite:" . $db_file);

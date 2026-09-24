@@ -1,0 +1,17 @@
+# Ignore actual running database
+db/inventaris.sqlite
+
+# Ignore temp files from auto-updater
+update_temp.zip
+temp_update_dir/
+
+# Ensure blank database template is included
+!db/inventaris_blank.sqlite
+
+# Ignore PHP temp/log files
+error_log
+*.log
+
+# Windows specific
+Thumbs.db
+Desktop.ini
