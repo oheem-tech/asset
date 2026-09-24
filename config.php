@@ -1,4 +1,16 @@
 <?php
+session_start();
+$current_page = basename($_SERVER['PHP_SELF']);
+// Halaman yang dikecualikan dari perlindungan login
+$allowed_pages = ['login.php', 'install_otomatis.php'];
+
+if (!in_array($current_page, $allowed_pages)) {
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+}
+
 // config.php
 $db_file = __DIR__ . '/db/inventaris.sqlite';
 $blank_file = __DIR__ . '/db/inventaris_blank.sqlite';
