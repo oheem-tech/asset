@@ -4,8 +4,8 @@ require_once 'config.php';
 // ==========================================
 // KONFIGURASI GITHUB UPDATER
 // ==========================================
-$github_username = 'USERNAME_GITHUB_ANDA'; // Ganti dengan username github anda
-$github_repo     = 'NAMA_REPO_ANDA';       // Ganti dengan nama repository
+$github_username = 'oheem-tech'; // Ganti dengan username github anda
+$github_repo     = 'asset';       // Ganti dengan nama repository
 $branch          = 'main';                 // Branch utama (biasanya main atau master)
 // ==========================================
 
