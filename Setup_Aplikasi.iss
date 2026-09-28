@@ -30,8 +30,8 @@ Name: "{userstartup}\Inventaris Aset Server"; Filename: "{app}\Start_Hidden.vbs"
 ; 1. Menjalankan skrip downloader secara senyap saat instalasi (mengambil source code dari GitHub)
 Filename: "{app}\php\php.exe"; Parameters: """{app}\install_otomatis.php"""; WorkingDir: "{app}"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
 
-; 2. Langsung menyalakan server di latar belakang setelah instalasi selesai
-Filename: "{app}\Start_Hidden.vbs"; Description: "Nyalakan Server Aset"; Flags: shellexec nowait postinstall skipifsilent
+; 2. Langsung menyalakan server di latar belakang setelah instalasi selesai (Menggunakan wscript agar diizinkan Windows)
+Filename: "{sys}\wscript.exe"; Parameters: "//B ""{app}\Start_Hidden.vbs"""; WorkingDir: "{app}"; Description: "Nyalakan Server Aset"; Flags: nowait postinstall skipifsilent
 
 ; 3. Buka aplikasi (browser)
 Filename: "{app}\Buka_Aplikasi.bat"; Description: "Buka Aplikasi Sekarang"; Flags: shellexec nowait postinstall skipifsilent
