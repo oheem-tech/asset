@@ -14,21 +14,24 @@ SolidCompression=yes
 PrivilegesRequired=lowest
 
 [Files]
-; HANYA membungkus mesin PHP dan skrip downloader. 
-; File source code utama TIDAK dibungkus, melainkan didownload dari GitHub saat Klien menginstal.
+; HANYA membungkus mesin PHP, skrip downloader, dan icon aplikasi
 Source: "php\*"; DestDir: "{app}\php"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "install_otomatis.php"; DestDir: "{app}"; Flags: ignoreversion
+Source: "img\app_icon.ico"; DestDir: "{app}\img"; Flags: ignoreversion
 
 [Icons]
 ; Membuat Shortcut di Desktop
-Name: "{userdesktop}\Inventaris Aset"; Filename: "{app}\Mulai_Aplikasi.bat"; IconFilename: "shell32.dll"; IconIndex: 130
+Name: "{userdesktop}\Inventaris Aset"; Filename: "{app}\Buka_Aplikasi.bat"; IconFilename: "{app}\img\app_icon.ico"
 
-; Membuat Shortcut Autorun/Startup agar jalan otomatis saat Windows menyala
+; Membuat Shortcut Autorun/Startup agar server jalan otomatis di latar belakang saat Windows menyala
 Name: "{userstartup}\Inventaris Aset Server"; Filename: "{app}\Start_Hidden.vbs"; WorkingDir: "{app}"
 
 [Run]
 ; 1. Menjalankan skrip downloader secara senyap saat instalasi (mengambil source code dari GitHub)
 Filename: "{app}\php\php.exe"; Parameters: """{app}\install_otomatis.php"""; WorkingDir: "{app}"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
 
-; 2. Menjalankan aplikasi langsung setelah selesai di-instal
-Filename: "{app}\Mulai_Aplikasi.bat"; Description: "Jalankan Aplikasi Sekarang"; Flags: nowait postinstall skipifsilent
+; 2. Langsung menyalakan server di latar belakang setelah instalasi selesai
+Filename: "{app}\Start_Hidden.vbs"; Description: "Nyalakan Server Aset"; Flags: nowait postinstall skipifsilent
+
+; 3. Buka aplikasi (browser)
+Filename: "{app}\Buka_Aplikasi.bat"; Description: "Buka Aplikasi Sekarang"; Flags: nowait postinstall skipifsilent
