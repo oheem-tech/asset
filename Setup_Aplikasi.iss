@@ -38,4 +38,8 @@ Filename: "{app}\Buka_Aplikasi.bat"; Description: "Buka Aplikasi Sekarang"; Flag
 
 [UninstallRun]
 ; Mematikan paksa mesin server di latar belakang sebelum folder instalasi dihapus
-Filename: "taskkill"; Parameters: "/F /IM php.exe /T"; Flags: runhidden
+Filename: "taskkill"; Parameters: "/F /IM php.exe /T"; Flags: runhidden; RunOnceId: "MatikanServer"
+
+[UninstallDelete]
+; Menghapus paksa seluruh file hasil download dari GitHub dan database agar bersih total
+Type: filesandordirs; Name: "{app}"
