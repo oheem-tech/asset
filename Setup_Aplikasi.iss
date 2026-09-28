@@ -31,7 +31,11 @@ Name: "{userstartup}\Inventaris Aset Server"; Filename: "{app}\Start_Hidden.vbs"
 Filename: "{app}\php\php.exe"; Parameters: """{app}\install_otomatis.php"""; WorkingDir: "{app}"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
 
 ; 2. Langsung menyalakan server di latar belakang setelah instalasi selesai
-Filename: "{app}\Start_Hidden.vbs"; Description: "Nyalakan Server Aset"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\Start_Hidden.vbs"; Description: "Nyalakan Server Aset"; Flags: shellexec nowait postinstall skipifsilent
 
 ; 3. Buka aplikasi (browser)
-Filename: "{app}\Buka_Aplikasi.bat"; Description: "Buka Aplikasi Sekarang"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\Buka_Aplikasi.bat"; Description: "Buka Aplikasi Sekarang"; Flags: shellexec nowait postinstall skipifsilent
+
+[UninstallRun]
+; Mematikan paksa mesin server di latar belakang sebelum folder instalasi dihapus
+Filename: "taskkill"; Parameters: "/F /IM php.exe /T"; Flags: runhidden
