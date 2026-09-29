@@ -26,6 +26,8 @@ Source: "Buka_Aplikasi.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Jalankan_Server.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Start_Hidden.vbs"; DestDir: "{app}"; Flags: ignoreversion
 
+Source: "download_app.ps1"; DestDir: "{app}"; Flags: ignoreversion
+
 [Icons]
 ; Membuat Shortcut di Desktop
 Name: "{userdesktop}\Inventaris Aset"; Filename: "{app}\Buka_Aplikasi.bat"; IconFilename: "{app}\img\app_icon.ico"
@@ -34,8 +36,8 @@ Name: "{userdesktop}\Inventaris Aset"; Filename: "{app}\Buka_Aplikasi.bat"; Icon
 Name: "{userstartup}\Inventaris Aset Server"; Filename: "{app}\Start_Hidden.vbs"; WorkingDir: "{app}"
 
 [Run]
-; 1. Menjalankan skrip downloader secara senyap saat instalasi (mengambil source code dari GitHub)
-Filename: "{app}\php\php.exe"; Parameters: """{app}\install_otomatis.php"""; WorkingDir: "{app}"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
+; 1. Download file aplikasi dari GitHub menggunakan PowerShell (built-in, tidak diblokir antivirus)
+Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-ExecutionPolicy Bypass -WindowStyle Hidden -File ""{app}\download_app.ps1"" -AppDir ""{app}"""; WorkingDir: "{app}"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
 
 ; 2. Langsung menyalakan server di latar belakang setelah instalasi selesai (Menggunakan wscript agar diizinkan Windows)
 Filename: "{sys}\wscript.exe"; Parameters: "//B ""{app}\Start_Hidden.vbs"""; WorkingDir: "{app}"; Description: "Nyalakan Server Aset"; Flags: nowait postinstall skipifsilent
