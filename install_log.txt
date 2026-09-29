@@ -2,3 +2,5 @@ GAGAL DOWNLOAD dari GitHub.
 HTTP Code: 404
 cURL Error: 
 URL: https://github.com/oheem-tech/asset/archive/refs/heads/main.zip
+[04:13:52] Berhasil menyalin 31 file ke folder instalasi.
+[04:13:52] SELESAI. Instalasi sukses!
