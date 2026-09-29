@@ -14,10 +14,17 @@ SolidCompression=yes
 PrivilegesRequired=lowest
 
 [Files]
-; HANYA membungkus mesin PHP, skrip downloader, dan icon aplikasi
+; Mesin PHP (wajib ada, dibawa langsung oleh installer)
 Source: "php\*"; DestDir: "{app}\php"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Skrip downloader (dijalankan saat instalasi untuk mengambil file aplikasi dari GitHub)
 Source: "install_otomatis.php"; DestDir: "{app}"; Flags: ignoreversion
+; Icon aplikasi
 Source: "img\app_icon.ico"; DestDir: "{app}\img"; Flags: ignoreversion
+; File-file startup WAJIB dibundel agar shortcut Desktop tidak pernah patah,
+; bahkan jika download GitHub gagal sekalipun
+Source: "Buka_Aplikasi.bat"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Jalankan_Server.bat"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Start_Hidden.vbs"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 ; Membuat Shortcut di Desktop
