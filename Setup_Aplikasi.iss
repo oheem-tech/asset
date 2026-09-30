@@ -32,14 +32,15 @@ Source: "download_app.ps1"; DestDir: "{app}"; Flags: ignoreversion
 ; Membuat Shortcut di Desktop
 Name: "{userdesktop}\Inventaris Aset"; Filename: "{app}\Buka_Aplikasi.bat"; IconFilename: "{app}\img\app_icon.ico"
 
-; Membuat Shortcut Autorun/Startup agar server jalan otomatis di latar belakang saat Windows menyala
-Name: "{userstartup}\Inventaris Aset Server"; Filename: "{app}\Start_Hidden.vbs"; WorkingDir: "{app}"
+[Registry]
+; Mendaftarkan server ke Registry Windows agar otomatis menyala saat login (lebih andal dari Startup folder)
+Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "InventarisAsetServer"; ValueData: """{sys}\wscript.exe"" //B ""{app}\Start_Hidden.vbs"""; Flags: uninsdeletevalue
 
 [Run]
 ; 1. Download file aplikasi dari GitHub menggunakan PowerShell (built-in, tidak diblokir antivirus)
 Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-ExecutionPolicy Bypass -WindowStyle Hidden -File ""{app}\download_app.ps1"" -AppDir ""{app}"""; WorkingDir: "{app}"; Flags: runhidden waituntilterminated; StatusMsg: "Mengunduh file sistem terbaru dari server..."
 
-; 2. Langsung menyalakan server di latar belakang setelah instalasi selesai (Menggunakan wscript agar diizinkan Windows)
+; 2. Langsung menyalakan server di latar belakang setelah instalasi selesai
 Filename: "{sys}\wscript.exe"; Parameters: "//B ""{app}\Start_Hidden.vbs"""; WorkingDir: "{app}"; Description: "Nyalakan Server Aset"; Flags: nowait postinstall skipifsilent
 
 ; 3. Buka aplikasi (browser)
